@@ -11,6 +11,7 @@
 #define DRV_NAND_FLASH_H_
 
 #include <rtdef.h>
+#include <rtdevice.h>
 
 /* read cmd */
 #define NAND_READ_ID                    0x9f    /* Read id */
@@ -155,6 +156,14 @@ typedef struct
 
 } nand_flash, *nand_flash_t;
 
+struct spi_nand_flash_mtd
+{
+    struct rt_mtd_nand_device           mtd_nand_device;
+    struct rt_spi_device *              rt_spi_device;
+    struct rt_mutex                     lock;
+    void *                              user_data;
+};
+typedef struct spi_nand_flash_mtd *rt_spi_nand_flash_device_t;
 
 /*
  * FLASH id info
